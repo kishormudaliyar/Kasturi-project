@@ -1,0 +1,139 @@
+/* ================= DASHBOARD BACKGROUND ================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+    background: radial-gradient(circle at 20% 30%, #5b21b6 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, #2563eb 0%, transparent 40%),
+                #0f172a;
+    color: white;
+}
+
+/* ================= CONTAINER ================= */
+
+.dashboard-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+/* ================= TITLE ================= */
+
+.dashboard-container h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+/* ================= GRID ================= */
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+/* ================= CARD ================= */
+
+.tool-card {
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(139,92,246,0.3);
+}
+
+/* ================= CARD TITLE ================= */
+
+.tool-card h3 {
+    font-size: 18px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+/* ================= INPUT & TEXTAREA ================= */
+
+.tool-card input,
+.tool-card textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    margin-bottom: 18px;
+    font-size: 14px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    transition: 0.3s;
+}
+
+.tool-card input:focus,
+.tool-card textarea:focus {
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 12px rgba(139,92,246,0.6);
+}
+
+/* ================= BUTTON ================= */
+
+.tool-card button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    color: white;
+    transition: 0.3s ease;
+}
+
+.tool-card button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(139,92,246,0.5);
+}
+
+/* ================= RESULT TEXT ================= */
+
+.result {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+/* ===== Fixed Bottom Center Button ===== */
+
+/* ===== Single Bottom Center Button ===== */
+
+.bottom-fixed-btn {
+    position: fixed;
+    bottom: 44px;
+    left: 80%;
+    transform: translateX(-50%);
+    
+}
+
+.nav-btn {
+    padding: 14px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    color: white;
+    transition: 0.0s ease;
+}
+
+.nav-btn:hover {
+    box-shadow: 0 12px 30px rgba(139,92,246,0.5);
+}

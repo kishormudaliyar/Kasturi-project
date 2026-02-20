@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cybersecurity X</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Cybersecurity Dashboard</h1>
+    <h2 id="welcomeUser" style="text-align: center; margin-bottom: 30px; color: #8b5cf6;"></h2>
+
+    <div class="tool-grid">
+        <!-- Fraud Message Check -->
+        <div class="tool-card">
+            <h3>Fraud Message Check</h3>
+            <textarea id="fraudText" placeholder="Paste message here..."></textarea>
+            <button onclick="checkMessage()">Check Message</button>
+            <div id="fraudResult" class="result"></div>
+        </div>
+
+        <!-- Link Check -->
+        <div class="tool-card">
+            <h3>Link Check</h3>
+            <input type="text" id="linkInput" placeholder="Enter link here...">
+            <button onclick="checkLink()">Check Link</button>
+            <div id="linkResult" class="result"></div>
+        </div>
+
+        <!-- Digital Assistant -->
+        <div class="tool-card">
+            <h3>Digital Assistant</h3>
+            <input type="text" id="assistantInput" placeholder="Ask about online safety...">
+            <button onclick="askAssistant()">Ask Assistant</button>
+            <div id="assistantResult" class="result"></div>
+        </div>
+
+        <!-- Fake Profile Detector -->
+        <div class="tool-card">
+            <h3>Fake Profile Detector</h3>
+            <textarea id="profileInput" placeholder="Paste profile bio..."></textarea>
+            <button onclick="checkProfile()">Check Profile</button>
+            <div id="profileResult" class="result"></div>
+        </div>
+
+        <!-- Data Masking -->
+        <div class="tool-card">
+            <h3>Personal Data Masking</h3>
+            <textarea id="maskInput" placeholder="Enter text with personal info..."></textarea>
+            <button onclick="maskPersonalData()">Mask Data</button>
+            <div id="maskResult" class="result"></div>
+        </div>
+    </div>
+
+    <div class="bottom-fixed-btn" style="display: flex; gap: 20px; left: 50%;">
+        <button onclick="logoutUser()" class="nav-btn" style="background: linear-gradient(90deg, #ef4444, #b91c1c);">Logout</button>
+        <button onclick="goToDetection()" class="nav-btn">Go to AI Detection</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script src="script1.js"></script>
+</body>
+</html>
