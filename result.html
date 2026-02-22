@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detailed Fraud Report</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="result-container">
+
+    <h1>📊 Detailed Fraud Analysis Report</h1>
+
+    <div class="meter">
+        <div id="meterFill" class="meter-fill"></div>
+    </div>
+
+    <h2 id="finalRiskText"></h2>
+
+    <div class="info-box">
+        <p id="summaryText"></p>
+    </div>
+
+    <div class="info-box">
+        <h3>Scan History</h3>
+        <ul id="historyList"></ul>
+    </div>
+
+    <button onclick="downloadReport()" class="action-btn">
+        📄 Download Report
+    </button>
+
+    <button onclick="goBack()" class="back-btn">
+        ⬅ Back to Detection
+    </button>
+
+</div>
+
+<audio id="alertSound">
+    <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg">
+</audio>
+
+<script src="script2.js"></script>
+</body>
+</html>

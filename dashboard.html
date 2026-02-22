@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cybersecurity X - Dashboard</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<div class="bottom-fixed-btn">
+    <button onclick="goToDetection()" class="nav-btn">
+    🚀 Start Advanced Detection
+</button>
+</div>
+
+<body>
+
+<div class="dashboard-container">
+
+    <h1 style="text-align:center; margin-bottom:30px;">
+        🔐 Cybersecurity X - AI Tools
+    </h1>
+
+    
+
+    <div class="tool-grid">
+
+        <!-- Phishing Detector -->
+        <div class="tool-card">
+            <h3>Phishing Message Detector</h3>
+            <textarea id="fraudText" placeholder="Paste message..."></textarea>
+            <button class="btn" onclick="checkMessage()">Check Message</button>
+            <div id="fraudResult"></div>
+        </div>
+
+        <!-- Link Detector -->
+        <div class="tool-card">
+            <h3>Fake Link Detector</h3>
+            <input type="text" id="linkInput" placeholder="Paste link...">
+            <button class="btn" onclick="checkLink()">Check Link</button>
+            <div id="linkResult"></div>
+        </div>
+
+        <!-- Digital Safety Assistant -->
+        <div class="tool-card">
+            <h3>Digital Safety Assistant</h3>
+            <input type="text" id="assistantInput" placeholder="Ask your question...">
+            <button class="btn" onclick="askAssistant()">Ask</button>
+            <div id="assistantResult"></div>
+        </div>
+
+        <!-- Fake Profile Detector -->
+        <div class="tool-card">
+            <h3>Fake Profile Detector</h3>
+            <input type="text" id="profileInput" placeholder="Profile description...">
+            <button class="btn" onclick="checkProfile()">Check Profile</button>
+            <div id="profileResult"></div>
+        </div>
+
+        <!-- Mask Personal Data -->
+        <div class="tool-card">
+            <h3>Mask Personal Data</h3>
+            <textarea id="maskInput" placeholder="Paste personal data..."></textarea>
+            <button class="btn" onclick="maskPersonalData()">Mask Data</button>
+            <div id="maskResult"></div>
+        </div>
+
+    </div>
+</div>
+
+<script src="script1.js"></script>
+
+</body>
+</html>

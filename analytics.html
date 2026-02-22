@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Risk Analytics</title>
+    <link rel="stylesheet" href="analytics.css">
+</head>
+<body>
+
+<div class="analytics-wrapper">
+
+    <h1>📊 AI Risk Analytics</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2 id="totalScans">0</h2>
+            <p>Total Scans</p>
+        </div>
+
+        <div class="stat-card high">
+            <h2 id="highCount">0</h2>
+            <p>High Risk</p>
+        </div>
+
+        <div class="stat-card medium">
+            <h2 id="mediumCount">0</h2>
+            <p>Medium Risk</p>
+        </div>
+
+        <div class="stat-card low">
+            <h2 id="lowCount">0</h2>
+            <p>Low Risk</p>
+        </div>
+    </div>
+
+    <div class="bar-section">
+        <h3>Risk Distribution</h3>
+
+        <div class="bar">
+            <div id="highBar" class="bar-fill high-bar"></div>
+        </div>
+
+        <div class="bar">
+            <div id="mediumBar" class="bar-fill medium-bar"></div>
+        </div>
+
+        <div class="bar">
+            <div id="lowBar" class="bar-fill low-bar"></div>
+        </div>
+    </div>
+
+    <button onclick="goDashboard()" class="back-btn">
+        ⬅ Back to Dashboard
+    </button>
+
+</div>
+
+<script src="analytics.js"></script>
+
+</body>
+</html>

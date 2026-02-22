@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced AI Detection</title>
+
+<style>
+
+/* ===== BODY ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #0f2a4d, #081423 70%);
+    color: #e6f1ff;
+    padding: 40px 0;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    width: 85%;
+    max-width: 900px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    color: #6ec1ff;
+}
+
+/* ===== TEXTAREA ===== */
+textarea {
+    width: 100%;
+    height: 130px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 18px;
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* ===== FILE ===== */
+input[type="file"] {
+    margin-top: 20px;
+    color: #cbd5e1;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    display: inline-block;
+    margin: 15px 10px 0 0;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.scan-btn {
+    background: linear-gradient(180deg, #ff5a5a, #c92d2d);
+    color: white;
+}
+
+.voice-btn {
+    background: linear-gradient(180deg, #00c6ff, #0072ff);
+    color: white;
+}
+
+.nav-btn {
+    background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== RESULT ===== */
+.result-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.high-risk { color: #ff4d4d; font-size: 26px; font-weight: bold; }
+.medium-risk { color: #ffd633; font-size: 26px; font-weight: bold; }
+.low-risk { color: #33ff88; font-size: 26px; font-weight: bold; }
+
+.info-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.scanning-text {
+    margin-top: 15px;
+    display: none;
+    color: #9dd6ff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚨 Advanced AI Detection</h1>
+
+<textarea id="userInput" placeholder="Paste suspicious SMS, link or message..."></textarea>
+
+<input type="file" id="screenshotUpload" accept="image/*">
+
+<br>
+
+<button class="btn voice-btn" onclick="startVoice()"> Voice Scan</button>
+<button class="btn scan-btn" onclick="runDetection()">Run AI Scan</button>
+<button class="btn nav-btn" onclick="goToScan()">Go To Scan Window</button>
+
+<div class="scanning-text" id="scanStatus">  AI Scanning....</div>
+
+<div id="resultSection" style="display:none;">
+    <div class="result-card">
+        <div id="riskTitle"></div>
+        <div id="riskScore"></div>
+    </div>
+
+    <div class="info-card">
+        <h3>Explanation</h3>
+        <p id="explanationText"></p>
+    </div>
+
+    <div class="info-card">
+        <h3>Safety Recommendation</h3>
+        <p>Do NOT click suspicious links. Do NOT share OTP. Report immediately.</p>
+    </div>
+</div>
+
+<br>
+<button class="btn nav-btn" onclick="goDashboard()">⬅ Back to Dashboard</button>
+
+</div>
+
+<script>
+
+/* ===========================
+   VOICE DETECTION (Speech API)
+=========================== */
+function startVoice() {
+
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice recognition not supported in this browser.");
+        return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("userInput").value = transcript;
+        alert("Voice Captured ✅ Now click Run AI Scan");
+    };
+
+    recognition.onerror = function() {
+        alert("Voice recognition error.");
+    };
+}
+
+/* ===========================
+   MAIN DETECTION
+=========================== */
+function runDetection() {
+
+    const input = document.getElementById("userInput").value.toLowerCase();
+    const file = document.getElementById("screenshotUpload").files[0];
+
+    let score = 0;
+    let reasons = [];
+
+    document.getElementById("scanStatus").style.display = "block";
+
+    setTimeout(() => {
+
+        // 🚨 Strong scam keywords
+        const highRiskWords = [
+            "bank account suspended",
+            "account suspended",
+            "share otp",
+            "verify immediately",
+            "click the link",
+            "update kyc",
+            "lottery winner",
+            "income tax refund"
+        ];
+
+        const mediumRiskWords = [
+            "urgent",
+            "bank",
+            "otp",
+            "verify",
+            "limited time",
+            "offer",
+            "click"
+        ];
+
+        // High risk words = +25
+        highRiskWords.forEach(word => {
+            if (input.includes(word)) {
+                score += 25;
+                reasons.push(word);
+            }
+        });
+
+        // Medium risk words = +10
+        mediumRiskWords.forEach(word => {
+            if (input.includes(word)) {
+                score += 10;
+                reasons.push(word);
+            }
+        });
+
+        // Suspicious links
+        if (input.includes("http://")) {
+            score += 25;
+            reasons.push("Unsafe HTTP link");
+        }
+
+        if (input.includes("bit.ly") || input.includes("tinyurl")) {
+            score += 20;
+            reasons.push("Shortened link detected");
+        }
+
+        // Too many numbers (possible OTP scam)
+        const numberCount = (input.match(/\d/g) || []).length;
+        if (numberCount > 6) {
+            score += 10;
+            reasons.push("Excessive numbers detected");
+        }
+
+        // Screenshot bonus scan
+        if (file) {
+            score += 5;
+            reasons.push("Screenshot uploaded");
+        }
+
+        // Cap score at 100
+        if (score > 100) score = 100;
+
+        // 🔥 STRONGER RISK CLASSIFICATION
+        let riskLevel = "";
+        let riskClass = "";
+
+        if (score >= 60) {
+            riskLevel = "🔴 HIGH RISK";
+            riskClass = "high-risk";
+        } 
+        else if (score >= 30) {
+            riskLevel = "🟡 MEDIUM RISK";
+            riskClass = "medium-risk";
+        } 
+        else {
+            riskLevel = "🟢 LOW RISK";
+            riskClass = "low-risk";
+        }
+
+        document.getElementById("riskTitle").innerHTML =
+            `<div class="${riskClass}">${riskLevel}</div>`;
+
+        document.getElementById("riskScore").innerHTML =
+            `<p>AI Risk Score: ${score}%</p>`;
+
+        document.getElementById("explanationText").innerText =
+            reasons.length > 0
+                ? "Detected: " + reasons.join(", ")
+                : "No suspicious patterns detected.";
+
+        document.getElementById("scanStatus").style.display = "none";
+        document.getElementById("resultSection").style.display = "block";
+
+        saveToHistory(input, riskLevel, score);
+
+    }, 1200);
+}
+/* ===========================
+   SAVE HISTORY
+=========================== */
+function saveToHistory(message, riskLevel, score) {
+
+    if (!message || message.trim() === "") return;
+
+    let history = JSON.parse(localStorage.getItem("scanHistory")) || [];
+
+    history.push({
+        message: message,
+        riskLevel: riskLevel,
+        score: score,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("scanHistory", JSON.stringify(history));
+}
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+function goDashboard() {
+    window.location.href = "dashboard.html";
+}
+
+function goToScan() {
+    window.location.href = "scan-history.html";
+}
+
+</script>
+
+</body>
+</html>
