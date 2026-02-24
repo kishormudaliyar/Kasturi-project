@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan History - Cybersecurity X</title>
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+
+<div class="history-wrapper">
+
+    <h1>📊 Scan History</h1>
+
+    <div class="history-table-container">
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Risk Level</th>
+                    <th>Score</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS will insert rows here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" onclick="clearHistory()">🗑 Clear History</button>
+        <button onclick="goanalytics()" class="nav-btn">go to Analytics</button>
+    </div>
+
+</div>
+
+<script src="history.js"></script>
+
+</body>
+</html>
