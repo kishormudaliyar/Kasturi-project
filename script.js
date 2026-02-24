@@ -1,4 +1,28 @@
 /* =====================================
+   SESSION PROTECTION
+===================================== */
+
+window.onload = function () {
+    // Check if we are on dashboard or detection pages
+    const protectedPages = ["dashboard.html", "detection-1.html", "scan-history.html", "analytics.html"];
+    const currentPage = window.location.pathname.split("/").pop();
+
+    if (protectedPages.includes(currentPage)) {
+        let loggedIn = localStorage.getItem("isLoggedIn");
+        if (loggedIn !== "true") {
+            window.location.href = "login.html";
+        }
+    }
+
+    // Show welcome message if exists
+    let user = localStorage.getItem("username");
+    let welcomeElement = document.getElementById("welcomeUser");
+    if (user && welcomeElement) {
+        welcomeElement.innerHTML = "Welcome, " + user + " 👋";
+    }
+};
+
+/* =====================================
    WINDOW 1 - INDEX (Start Demo)
 ===================================== */
 
@@ -6,38 +30,29 @@ function startDemo() {
     window.location.href = "login.html";
 }
 
-
-
 /* =====================================
    WINDOW 2 - LOGIN VALIDATION
 ===================================== */
 
 function loginUser() {
-
-    let nameInput = document.getElementById("name");
-    let phoneInput = document.getElementById("phone");
-    let error = document.getElementById("loginError");
-
+    let nameInput = document.getElementById("nameInput");
+    let phoneInput = document.getElementById("phoneInput");
+    
     if (!nameInput || !phoneInput) return;
 
     let name = nameInput.value.trim();
     let phone = phoneInput.value.trim();
 
-    error.innerHTML = "";
-
     // Check empty fields
     if (name === "" || phone === "") {
-        error.innerHTML = "❌ Please fill all fields.";
-        error.style.color = "red";
+        alert("❌ Please fill all fields.");
         return;
     }
 
     // Validate phone (10 digits only)
     let phonePattern = /^[0-9]{10}$/;
-
     if (!phonePattern.test(phone)) {
-        error.innerHTML = "❌ Enter valid 10-digit phone number.";
-        error.style.color = "red";
+        alert("❌ Enter valid 10-digit phone number.");
         return;
     }
 
@@ -49,37 +64,8 @@ function loginUser() {
     window.location.href = "dashboard.html";
 }
 
-
-
 /* =====================================
-   SESSION PROTECTION (Optional but Important)
-===================================== */
-
-window.onload = function () {
-
-    // If user tries to open dashboard without login
-    if (window.location.pathname.includes("dashboard.html")) {
-
-        let loggedIn = localStorage.getItem("isLoggedIn");
-
-        if (loggedIn !== "true") {
-            window.location.href = "login.html";
-        }
-    }
-
-    // Show welcome message if exists
-    let user = localStorage.getItem("username");
-    let welcomeElement = document.getElementById("welcomeUser");
-
-    if (user && welcomeElement) {
-        welcomeElement.innerHTML = "Welcome, " + user + " 👋";
-    }
-};
-
-
-
-/* =====================================
-   LOGOUT FUNCTION (Optional)
+   LOGOUT FUNCTION
 ===================================== */
 
 function logoutUser() {
@@ -87,6 +73,7 @@ function logoutUser() {
     localStorage.removeItem("username");
     window.location.href = "index.html";
 }
+
 /* ===========================
    MULTI LANGUAGE SYSTEM
 =========================== */
@@ -113,39 +100,31 @@ const translations = {
 };
 
 function changeLanguage() {
+    let langSelect = document.getElementById("languageSelect");
+    if (!langSelect) return;
+    
+    let selectedLang = langSelect.value;
+    
+    const title = document.getElementById("loginTitle");
+    const name = document.getElementById("nameInput");
+    const phone = document.getElementById("phoneInput");
+    const btn = document.getElementById("loginBtn");
 
-    let selectedLang = document.getElementById("languageSelect").value;
-
-    document.getElementById("loginTitle").innerText =
-        translations[selectedLang].title;
-
-    document.getElementById("name").placeholder =
-        translations[selectedLang].name;
-
-    document.getElementById("phone").placeholder =
-        translations[selectedLang].phone;
-
-    document.getElementById("loginBtn").innerText =
-        translations[selectedLang].button;
+    if (title) title.innerText = translations[selectedLang].title;
+    if (name) name.placeholder = translations[selectedLang].name;
+    if (phone) phone.placeholder = translations[selectedLang].phone;
+    if (btn) btn.innerText = translations[selectedLang].button;
 }
-// LOGIN BUTTON CLICK
-document.getElementById("loginBtn").addEventListener("click", function () {
 
-    const name = document.getElementById("nameInput").value;
-    const phone = document.getElementById("phoneInput").value;
-
-    if (name === "" || phone === "") {
-        alert("Please fill all details");
-        return;
+// Attach event listener for login button if it exists
+document.addEventListener("DOMContentLoaded", () => {
+    const loginBtn = document.getElementById("loginBtn");
+    if (loginBtn) {
+        loginBtn.addEventListener("click", loginUser);
     }
-
-    if (phone.length !== 10 || isNaN(phone)) {
-        alert("Enter valid 10-digit phone number");
-        return;
+    
+    const langSelect = document.getElementById("languageSelect");
+    if (langSelect) {
+        langSelect.addEventListener("change", changeLanguage);
     }
-
-    // If everything correct → go to dashboard
-    window.location.href = "dashboard.html";
 });
-
-            

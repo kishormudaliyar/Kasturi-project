@@ -1,0 +1,134 @@
+/* ================= SHARED HUB THEME ================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================= HEADER STYLE (FOR INDEX/LOGIN) ================= */
+.theme-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0 40px;
+    height: 70px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
+    color: white;
+    height: 100%;
+    padding: 0 20px;
+    margin-left: -40px;
+    min-width: 200px;
+}
+
+.logo-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* ================= CONTAINER / CARD ================= */
+.welcome-container, .card {
+    background-color: white;
+    padding: 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+h1, h2 {
+    color: #1e40af;
+    margin-top: 0;
+}
+
+p {
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* ================= BUTTONS ================= */
+.btn, .demo-btn {
+    padding: 14px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, #3b82f6, #1e40af);
+    color: white;
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.2);
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover, .demo-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+}
+
+/* ================= INPUTS ================= */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-family: inherit;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ================= LANGUAGE SELECT ================= */
+.language-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.language-select {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 13px;
+}
