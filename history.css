@@ -1,0 +1,104 @@
+/* ================= HISTORY LIGHT THEME ================= */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+.history-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+h1 {
+    text-align: center;
+    color: #0f172a;
+    margin-bottom: 32px;
+    font-weight: 800;
+    font-size: 28px;
+}
+
+.history-table-container {
+    background: white;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 18px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tr {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+.high { color: #dc2626; font-weight: 700; }
+.medium { color: #d97706; font-weight: 700; }
+.low { color: #059669; font-weight: 700; }
+
+.btn-group {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn, .nav-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+/* Distinct subtle Delete button */
+.btn {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.btn:hover {
+    background: #fecaca;
+    transform: translateY(-2px);
+}
+
+.nav-btn {
+    background: #1e293b;
+    color: white;
+}
+
+.nav-btn:hover {
+    background: #334155;
+    transform: translateY(-2px);
+}

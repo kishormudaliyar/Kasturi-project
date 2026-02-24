@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Risk Analytics - CyberSecurityX</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="analytics.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-section">
+            <span class="logo-text">CyberSecurityX</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">Dashboard</a>
+            <a href="detection-1.html" class="nav-item">Advanced AI</a>
+            <a href="scan-history.html" class="nav-item">Reports</a>
+            <a href="analytics.html" class="nav-item active">Analytics</a>
+        </nav>
+        <div class="header-right">
+            <span id="welcomeUser" class="welcome-text"></span>
+            <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        </div>
+    </header>
+
+<div class="analytics-wrapper">
+
+    <h1>📊 AI Risk Analytics</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2 id="totalScans">0</h2>
+            <p>Total Scans</p>
+        </div>
+
+        <div class="stat-card high">
+            <h2 id="highCount">0</h2>
+            <p>High Risk</p>
+        </div>
+
+        <div class="stat-card medium">
+            <h2 id="mediumCount">0</h2>
+            <p>Medium Risk</p>
+        </div>
+
+        <div class="stat-card low">
+            <h2 id="lowCount">0</h2>
+            <p>Low Risk</p>
+        </div>
+    </div>
+
+    <div class="bar-section">
+        <h3>Risk Distribution (%)</h3>
+
+        <div class="bar-label" style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:12px; font-weight:600; color:#ef4444;"><span>High Risk</span><span id="highPerc">0%</span></div>
+        <div class="bar">
+            <div id="highBar" class="bar-fill high-bar"></div>
+        </div>
+
+        <div class="bar-label" style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:12px; font-weight:600; color:#f59e0b;"><span>Medium Risk</span><span id="mediumPerc">0%</span></div>
+        <div class="bar">
+            <div id="mediumBar" class="bar-fill medium-bar"></div>
+        </div>
+
+        <div class="bar-label" style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:12px; font-weight:600; color:#10b981;"><span>Low Risk</span><span id="lowPerc">0%</span></div>
+        <div class="bar">
+            <div id="lowBar" class="bar-fill low-bar"></div>
+        </div>
+    </div>
+
+    <button onclick="goDashboard()" class="back-btn">
+        ⬅ Back to Dashboard
+    </button>
+
+</div>
+
+<script src="script.js"></script>
+<script src="analytics.js"></script>
+
+</body>
+</html>

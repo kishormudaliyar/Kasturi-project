@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecurityX - Dashboard</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        #safetyTipDisplay { transition: opacity 0.2s ease; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-section">
+            <span class="logo-text">CyberSecurityX</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item active">Dashboard</a>
+            <a href="detection-1.html" class="nav-item">Advanced AI</a>
+            <a href="scan-history.html" class="nav-item">Reports</a>
+            <a href="analytics.html" class="nav-item">Analytics</a>
+        </nav>
+        <div class="header-right">
+            <span id="welcomeUser" class="welcome-text"></span>
+            <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <div class="dashboard-intro">
+            <h2 id="pageTitle">Security Dashboard</h2>
+            <p>Welcome back! Monitor your digital safety using our AI tools.</p>
+        </div>
+
+        <div class="top-row">
+            <!-- Phishing Message Detector -->
+            <div class="tool-card phishing-detector">
+                <div class="card-header">
+                    <h3>Phishing Message Detector</h3>
+                </div>
+                <div class="card-body">
+                    <textarea id="fraudText" placeholder="Enter message to analyze..."></textarea>
+                    <div class="button-wrapper">
+                        <button class="btn btn-blue" onclick="checkMessage()">Analyze Message</button>
+                    </div>
+                    <div id="fraudResult" class="status-box"></div>
+                </div>
+            </div>
+
+            <!-- Fake Link Checker -->
+            <div class="tool-card link-checker">
+                <div class="card-header">
+                    <h3>Fake Link Checker</h3>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="linkInput" placeholder="Enter URL to check...">
+                    <div class="button-wrapper">
+                        <button class="btn btn-green" onclick="checkLink()">Check Link</button>
+                    </div>
+                    <div id="linkResult" class="status-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-row">
+            <!-- Safety Assistant -->
+            <div class="tool-card safety-assistant">
+                <div class="card-header">
+                    <h3>Safety Assistant</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="safety-tips" id="safetyTipDisplay">
+                        <li style="color: #6b7280; font-style: italic;">Press the button below for a safety tip...</li>
+                    </ul>
+                    <div class="button-wrapper" style="margin-top: auto; margin-bottom: 0;">
+                        <button class="btn btn-blue" onclick="getSafetyTip()">Get New Tip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Analyzer -->
+            <div class="tool-card profile-analyzer">
+                <div class="card-header">
+                    <h3>Profile Analyzer</h3>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="profileInput" placeholder="Enter Profile URL or Username...">
+                    <div class="button-wrapper">
+                        <button class="btn btn-orange" onclick="checkProfile()">Analyze Profile</button>
+                    </div>
+                    <div id="profileResult" class="status-box profile-status">
+                        <span id="profileStatusText"></span>
+                        <div id="riskScoreCircle" class="risk-score-circle" style="display: none;">
+                            <div class="risk-score-label">Risk Score</div>
+                            <div id="riskScoreValue" class="risk-score-value">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Masker -->
+            <div class="tool-card data-masker">
+                <div class="card-header">
+                    <h3>Data Masker</h3>
+                </div>
+                <div class="card-body">
+                    <textarea id="maskInput" placeholder="Enter text to mask data..."></textarea>
+                    <div class="button-wrapper">
+                        <button class="btn btn-blue" onclick="maskPersonalData()">Mask Data</button>
+                    </div>
+                    <div id="maskResult" class="masked-result-box">
+                        <p class="masked-label">Masked Result:</p>
+                        <div id="maskResultContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="script1-1.js"></script>
+
+</body>
+</html>

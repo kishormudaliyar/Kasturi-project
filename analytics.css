@@ -1,0 +1,112 @@
+/* ================= ANALYTICS LIGHT THEME ================= */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f4f9;
+    color: #333;
+}
+
+.analytics-wrapper {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #1e40af;
+    margin-bottom: 40px;
+    font-weight: 800;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+}
+
+.stat-card h2 {
+    font-size: 36px;
+    margin: 0;
+    color: #1e40af;
+}
+
+.stat-card p {
+    margin: 10px 0 0;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.stat-card.high h2 { color: #ef4444; }
+.stat-card.medium h2 { color: #f59e0b; }
+.stat-card.low h2 { color: #10b981; }
+
+.bar-section {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+}
+
+.bar-section h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 18px;
+    color: #1f2937;
+}
+
+.bar {
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    width: 0%;
+    transition: width 1s ease-in-out;
+}
+
+.high-bar { background: #ef4444; }
+.medium-bar { background: #f59e0b; }
+.low-bar { background: #10b981; }
+
+.back-btn {
+    display: block;
+    margin: 40px auto 0;
+    padding: 12px 30px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+@media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+}

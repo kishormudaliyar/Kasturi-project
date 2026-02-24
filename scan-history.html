@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan History - CyberSecurityX</title>
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="history.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo-section">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">CyberSecurityX</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">Dashboard</a>
+            <a href="detection-1.html" class="nav-item">Advanced AI</a>
+            <a href="scan-history.html" class="nav-item active">Reports</a>
+            <a href="analytics.html" class="nav-item">Analytics</a>
+        </nav>
+        <div class="header-right">
+            <span id="welcomeUser" class="welcome-text"></span>
+            <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        </div>
+    </header>
+
+<div class="history-wrapper">
+
+    <h1>AI Scan History</h1>
+
+    <div class="history-table-container">
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Message / Source</th>
+                    <th>Risk Level</th>
+                    <th>Score</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JS will insert rows here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn" onclick="clearHistory()">Delete All Records</button>
+        <button onclick="goanalytics()" class="nav-btn">View Full Analytics</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+<script src="history.js"></script>
+
+</body>
+</html>
