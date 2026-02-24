@@ -1,139 +1,314 @@
-/* ================= DASHBOARD BACKGROUND ================= */
+/* ================= GENERAL STYLES ================= */
 
 body {
     margin: 0;
     min-height: 100vh;
-    font-family: "Inter", sans-serif;
-    background: radial-gradient(circle at 20% 30%, #5b21b6 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, #2563eb 0%, transparent 40%),
-                #0f172a;
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f4f9;
+    color: #333;
+}
+
+/* ================= HEADER ================= */
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0 40px;
+    height: 70px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #1e40af, #3b82f6);
     color: white;
+    height: 100%;
+    padding: 0 20px;
+    margin-left: -40px;
+    min-width: 200px;
 }
 
-/* ================= CONTAINER ================= */
-
-.dashboard-container {
-    width: 95%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 60px 20px;
+.logo-icon {
+    font-size: 24px;
+    margin-right: 10px;
 }
 
-/* ================= TITLE ================= */
-
-.dashboard-container h1 {
-    text-align: center;
-    font-size: 36px;
+.logo-text {
     font-weight: 700;
-    margin-bottom: 50px;
+    font-size: 20px;
 }
 
-/* ================= GRID ================= */
-
-.tool-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 35px;
+.nav-menu {
+    display: flex;
+    gap: 30px;
+    flex-grow: 1;
+    margin-left: 40px;
 }
 
-/* ================= CARD ================= */
+.nav-item {
+    text-decoration: none;
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 10px 0;
+    position: relative;
+}
+
+.nav-item.active {
+    color: #1e40af;
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #1e40af;
+}
+
+.logout-btn {
+    background-color: white;
+    border: 1px solid #d1d5db;
+    padding: 8px 25px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background-color: #f9fafb;
+}
+
+/* ================= DASHBOARD CONTENT ================= */
+
+.dashboard-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.top-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.bottom-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* ================= CARD STYLES ================= */
 
 .tool-card {
-    padding: 30px;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s ease;
-}
-
-.tool-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(139,92,246,0.3);
-}
-
-/* ================= CARD TITLE ================= */
-
-.tool-card h3 {
-    font-size: 18px;
-    margin-bottom: 18px;
-    font-weight: 600;
-}
-
-/* ================= INPUT & TEXTAREA ================= */
-
-.tool-card input,
-.tool-card textarea {
-    width: 100%;
-    padding: 14px;
+    background-color: white;
     border-radius: 12px;
-    border: none;
-    outline: none;
-    margin-bottom: 18px;
-    font-size: 14px;
-    background: rgba(255,255,255,0.08);
-    color: white;
-    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.tool-card input:focus,
-.tool-card textarea:focus {
-    background: rgba(255,255,255,0.12);
-    box-shadow: 0 0 12px rgba(139,92,246,0.6);
+.phishing-detector { flex: 1.5; }
+.link-checker { flex: 1; }
+.safety-assistant { flex: 1; }
+.profile-analyzer { flex: 1.2; }
+.data-masker { flex: 1.5; }
+
+.card-header {
+    background-color: #f9fafb;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-/* ================= BUTTON ================= */
-
-.tool-card button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 30px;
-    border: none;
-    font-size: 15px;
+.card-header h3 {
+    margin: 0;
+    font-size: 16px;
     font-weight: 600;
-    cursor: pointer;
-    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
-    color: white;
-    transition: 0.3s ease;
+    color: #1f2937;
 }
 
-.tool-card button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(139,92,246,0.5);
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* ================= RESULT TEXT ================= */
-
-.result {
-    margin-top: 10px;
+textarea, input[type="text"] {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: 12px;
+    font-family: inherit;
     font-size: 14px;
-    color: #e2e8f0;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
 
-/* ===== Fixed Bottom Center Button ===== */
+textarea {
+    resize: none;
+    height: 100px;
+}
 
-/* ===== Single Bottom Center Button ===== */
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 10px 30px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.btn-blue { background-color: #3b82f6; }
+.btn-blue:hover { background-color: #2563eb; }
+
+.btn-green { background-color: #10b981; }
+.btn-green:hover { background-color: #059669; }
+
+.btn-orange { background-color: #f59e0b; }
+.btn-orange:hover { background-color: #d97706; }
+
+/* ================= STATUS BOXES ================= */
+
+.status-box {
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    display: none; /* Shown via JS */
+}
+
+/* ================= SAFETY TIPS ================= */
+
+.safety-tips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.safety-tips li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+}
+
+.safety-tips li:last-child { border-bottom: none; }
+
+.profile-status {
+    position: relative;
+    padding-right: 60px;
+}
+
+.risk-score-circle {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+    border: 2px solid white;
+}
+
+.risk-score-label {
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.risk-score-value {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.masked-result-box {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+.masked-label {
+    font-weight: 600;
+    font-size: 13px;
+    margin: 0 0 5px 0;
+    color: #6b7280;
+}
+
+#maskResultContent {
+    font-family: monospace;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+/* ================= FIXED NAV BUTTON ================= */
 
 .bottom-fixed-btn {
     position: fixed;
-    bottom: 44px;
-    left: 80%;
-    transform: translateX(-50%);
-    
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
 }
 
 .nav-btn {
-    padding: 14px 40px;
-    font-size: 16px;
+    padding: 12px 25px;
+    font-size: 15px;
     font-weight: 600;
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+    background: linear-gradient(90deg, #3b82f6, #1e40af);
     color: white;
-    transition: 0.0s ease;
+    box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+    transition: 0.3s;
 }
 
 .nav-btn:hover {
-    box-shadow: 0 12px 30px rgba(139,92,246,0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+}
+
+/* ================= MOBILE RESPONSIVENESS ================= */
+
+@media (max-width: 900px) {
+    .top-row, .bottom-row {
+        flex-direction: column;
+    }
+    
+    .logo-section {
+        min-width: auto;
+    }
 }

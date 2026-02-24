@@ -1,71 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cybersecurity X - Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSecure Hub - Dashboard</title>
     <link rel="stylesheet" href="style1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<div class="bottom-fixed-btn">
-    <button onclick="goToDetection()" class="nav-btn">
-    🚀 Start Advanced Detection
-</button>
-</div>
-
 <body>
 
-<div class="dashboard-container">
+    <header class="main-header">
+        <div class="logo-section">
+            <div class="logo-icon">🛡️</div>
+            <span class="logo-text">CyberSecure Hub</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active">Dashboard</a>
+            <a href="#" class="nav-item">Reports</a>
+            <a href="#" class="nav-item">About</a>
+        </nav>
+        <button class="logout-btn" onclick="logoutUser()">Logout</button>
+    </header>
 
-    <h1 style="text-align:center; margin-bottom:30px;">
-        🔐 Cybersecurity X - AI Tools
-    </h1>
+    <main class="dashboard-content">
+        <div class="top-row">
+            <!-- Phishing Message Detector -->
+            <div class="tool-card phishing-detector">
+                <div class="card-header">
+                    <h3>Phishing Message Detector</h3>
+                </div>
+                <div class="card-body">
+                    <textarea id="fraudText" placeholder="Enter message to analyze..."></textarea>
+                    <div class="button-wrapper">
+                        <button class="btn btn-blue" onclick="checkMessage()">Analyze Message</button>
+                    </div>
+                    <div id="fraudResult" class="status-box"></div>
+                </div>
+            </div>
 
-    
-
-    <div class="tool-grid">
-
-        <!-- Phishing Detector -->
-        <div class="tool-card">
-            <h3>Phishing Message Detector</h3>
-            <textarea id="fraudText" placeholder="Paste message..."></textarea>
-            <button class="btn" onclick="checkMessage()">Check Message</button>
-            <div id="fraudResult"></div>
+            <!-- Fake Link Checker -->
+            <div class="tool-card link-checker">
+                <div class="card-header">
+                    <h3>Fake Link Checker</h3>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="linkInput" placeholder="Enter URL to check...">
+                    <div class="button-wrapper">
+                        <button class="btn btn-green" onclick="checkLink()">Check Link</button>
+                    </div>
+                    <div id="linkResult" class="status-box"></div>
+                </div>
+            </div>
         </div>
 
-        <!-- Link Detector -->
-        <div class="tool-card">
-            <h3>Fake Link Detector</h3>
-            <input type="text" id="linkInput" placeholder="Paste link...">
-            <button class="btn" onclick="checkLink()">Check Link</button>
-            <div id="linkResult"></div>
-        </div>
+        <div class="bottom-row">
+            <!-- Safety Assistant -->
+            <div class="tool-card safety-assistant">
+                <div class="card-header">
+                    <h3>Safety Assistant</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="safety-tips">
+                        <li><span class="tip-icon">✔️</span> Avoid clicking on unknown links.</li>
+                        <li><span class="tip-icon">👤</span> Be cautious of urgent requests.</li>
+                        <li><span class="tip-icon">🛡️</span> Scan attachments for malware.</li>
+                    </ul>
+                </div>
+            </div>
 
-        <!-- Digital Safety Assistant -->
-        <div class="tool-card">
-            <h3>Digital Safety Assistant</h3>
-            <input type="text" id="assistantInput" placeholder="Ask your question...">
-            <button class="btn" onclick="askAssistant()">Ask</button>
-            <div id="assistantResult"></div>
-        </div>
+            <!-- Profile Analyzer -->
+            <div class="tool-card profile-analyzer">
+                <div class="card-header">
+                    <h3>Profile Analyzer</h3>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="profileInput" placeholder="Enter Profile URL or Username...">
+                    <div class="button-wrapper">
+                        <button class="btn btn-orange" onclick="checkProfile()">Analyze Profile</button>
+                    </div>
+                    <div id="profileResult" class="status-box profile-status">
+                        <span id="profileStatusText"></span>
+                        <div id="riskScoreCircle" class="risk-score-circle" style="display: none;">
+                            <div class="risk-score-label">Risk Score</div>
+                            <div id="riskScoreValue" class="risk-score-value">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Fake Profile Detector -->
-        <div class="tool-card">
-            <h3>Fake Profile Detector</h3>
-            <input type="text" id="profileInput" placeholder="Profile description...">
-            <button class="btn" onclick="checkProfile()">Check Profile</button>
-            <div id="profileResult"></div>
+            <!-- Data Masker -->
+            <div class="tool-card data-masker">
+                <div class="card-header">
+                    <h3>Data Masker</h3>
+                </div>
+                <div class="card-body">
+                    <textarea id="maskInput" placeholder="Enter text to mask data..."></textarea>
+                    <div class="button-wrapper">
+                        <button class="btn btn-blue" onclick="maskPersonalData()">Mask Data</button>
+                    </div>
+                    <div id="maskResult" class="masked-result-box">
+                        <p class="masked-label">Masked Result:</p>
+                        <div id="maskResultContent"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <!-- Mask Personal Data -->
-        <div class="tool-card">
-            <h3>Mask Personal Data</h3>
-            <textarea id="maskInput" placeholder="Paste personal data..."></textarea>
-            <button class="btn" onclick="maskPersonalData()">Mask Data</button>
-            <div id="maskResult"></div>
-        </div>
-
+    <div class="bottom-fixed-btn">
+        <button onclick="goToDetection()" class="nav-btn">
+            🚀 Start Advanced Detection
+        </button>
     </div>
-</div>
 
-<script src="script1.js"></script>
+    <script src="script.js"></script>
+    <script src="script1-1.js"></script>
 
 </body>
 </html>

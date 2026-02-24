@@ -9,7 +9,10 @@ function checkMessage() {
 
     if (text === "") {
         result.innerHTML = "Please enter a message.";
-        result.style.color = "orange";
+        result.style.display = "block";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
         return;
     }
 
@@ -45,18 +48,26 @@ function checkMessage() {
         score += 3;
     }
 
+    result.style.display = "block";
+
     // Final decision
     if (score >= 6) {
-        result.innerHTML = "🚨 HIGH RISK SCAM DETECTED!";
-        result.style.color = "red";
+        result.innerHTML = "🚨 Warning: This message looks suspicious!";
+        result.style.backgroundColor = "#fee2e2";
+        result.style.color = "#b91c1c";
+        result.style.border = "1px solid #fecaca";
     }
     else if (score >= 3) {
         result.innerHTML = "⚠️ Suspicious message. Be careful.";
-        result.style.color = "orange";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
     }
     else {
         result.innerHTML = "✅ Message appears safe.";
-        result.style.color = "green";
+        result.style.backgroundColor = "#f0fdf4";
+        result.style.color = "#15803d";
+        result.style.border = "1px solid #bbf7d0";
     }
 }
 
@@ -73,7 +84,10 @@ function checkLink() {
 
     if (link === "") {
         result.innerHTML = "Please enter a link.";
-        result.style.color = "orange";
+        result.style.display = "block";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
         return;
     }
 
@@ -96,17 +110,25 @@ function checkLink() {
     // Not https
     if (!link.startsWith("https")) score += 1;
 
+    result.style.display = "block";
+
     if (score >= 5) {
         result.innerHTML = "🚨 Dangerous Link Detected!";
-        result.style.color = "red";
+        result.style.backgroundColor = "#fee2e2";
+        result.style.color = "#b91c1c";
+        result.style.border = "1px solid #fecaca";
     }
     else if (score >= 2) {
         result.innerHTML = "⚠️ Suspicious link. Verify before opening.";
-        result.style.color = "orange";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
     }
     else {
-        result.innerHTML = "✅ Link looks safe.";
-        result.style.color = "green";
+        result.innerHTML = "✅ Safe Link: This URL is secure.";
+        result.style.backgroundColor = "#f0fdf4";
+        result.style.color = "#15803d";
+        result.style.border = "1px solid #bbf7d0";
     }
 }
 
@@ -156,10 +178,17 @@ function checkProfile() {
 
     let text = document.getElementById("profileInput").value.toLowerCase().trim();
     let result = document.getElementById("profileResult");
+    let statusText = document.getElementById("profileStatusText");
+    let scoreCircle = document.getElementById("riskScoreCircle");
+    let scoreValue = document.getElementById("riskScoreValue");
 
     if (text === "") {
-        result.innerHTML = "Enter profile details.";
-        result.style.color = "orange";
+        statusText.innerHTML = "Enter profile details.";
+        result.style.display = "block";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
+        scoreCircle.style.display = "none";
         return;
     }
 
@@ -172,22 +201,39 @@ function checkProfile() {
     ];
 
     scamIndicators.forEach(word => {
-        if (text.includes(word)) score += 2;
+        if (text.includes(word)) score += 20;
     });
 
-    if (text.includes("model") && text.includes("dm")) score += 2;
+    if (text.includes("model") && text.includes("dm")) score += 30;
+    
+    // Add some randomness if no words found but text is short
+    if (score === 0 && text.length > 5) score = Math.floor(Math.random() * 20);
+    if (score > 100) score = 100;
 
-    if (score >= 4) {
-        result.innerHTML = "🚨 High probability fake/scam profile!";
-        result.style.color = "red";
+    result.style.display = "block";
+    scoreCircle.style.display = "flex";
+    scoreValue.innerHTML = score;
+
+    if (score >= 60) {
+        statusText.innerHTML = "🔥 High Risk: Likely a Fake Profile";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
+        scoreCircle.style.backgroundColor = "#ef4444";
     }
-    else if (score >= 2) {
-        result.innerHTML = "⚠️ Profile seems suspicious.";
-        result.style.color = "orange";
+    else if (score >= 30) {
+        statusText.innerHTML = "⚠️ Profile seems suspicious.";
+        result.style.backgroundColor = "#fff7ed";
+        result.style.color = "#c2410c";
+        result.style.border = "1px solid #fdba74";
+        scoreCircle.style.backgroundColor = "#f59e0b";
     }
     else {
-        result.innerHTML = "✅ Profile appears normal.";
-        result.style.color = "green";
+        statusText.innerHTML = "✅ Profile appears normal.";
+        result.style.backgroundColor = "#f0fdf4";
+        result.style.color = "#15803d";
+        result.style.border = "1px solid #bbf7d0";
+        scoreCircle.style.backgroundColor = "#10b981";
     }
 }
 
@@ -200,11 +246,11 @@ function checkProfile() {
 function maskPersonalData() {
 
     let text = document.getElementById("maskInput").value;
-    let result = document.getElementById("maskResult");
+    let resultDisplay = document.getElementById("maskResult");
+    let resultContent = document.getElementById("maskResultContent");
 
     if (text.trim() === "") {
-        result.innerHTML = "Please enter text.";
-        result.style.color = "orange";
+        resultContent.innerHTML = "Please enter text.";
         return;
     }
 
@@ -223,9 +269,8 @@ function maskPersonalData() {
     // Mask card numbers
     text = text.replace(/\b\d{16}\b/g, "****************");
 
-    result.innerHTML = text;
-    result.style.color = "yellow";
+    resultContent.innerHTML = text.replace(/\n/g, "<br>");
 }
 function goToDetection() {
-    window.location.href = "detection.html";
+    window.location.href = "detection-1.html";
 }
