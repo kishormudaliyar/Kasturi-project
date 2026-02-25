@@ -154,8 +154,52 @@ input:focus, select:focus {
     background: rgba(255, 255, 255, 0.08);
 }
 
-/* ================= RESPONSIVENESS ================= */
-@media (max-width: 640px) {
+/* ================= GOOGLE BUTTON & DIVIDER ================= */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.divider:not(:empty)::before { margin-right: 15px; }
+.divider:not(:empty)::after { margin-left: 15px; }
+
+.google-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: white;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.google-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.google-btn:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+}
     .theme-header { padding: 0 20px; }
     .logo-section { min-width: 180px; padding: 0 15px; }
     .welcome-container, .card { padding: 40px 20px; }

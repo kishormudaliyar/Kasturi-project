@@ -1,49 +1,50 @@
-window.onload = function () {
+/* =====================================
+   ANALYTICS MANAGEMENT (Firestore)
+===================================== */
 
-    const history = JSON.parse(localStorage.getItem("scanHistory")) || [];
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        loadAnalytics(user.uid);
+    }
+});
 
-    let total = history.length;
-    let high = 0;
-    let medium = 0;
-    let low = 0;
+function loadAnalytics(userId) {
+    db.collection("scans")
+        .where("userId", "==", userId)
+        .onSnapshot((querySnapshot) => {
+            let total = querySnapshot.size;
+            let high = 0;
+            let medium = 0;
+            let low = 0;
 
-    history.forEach(item => {
+            querySnapshot.forEach((doc) => {
+                const item = doc.data();
+                if (item.riskLevel.includes("HIGH")) high++;
+                else if (item.riskLevel.includes("MEDIUM")) medium++;
+                else if (item.riskLevel.includes("LOW")) low++;
+            });
 
-        if (!item.riskLevel) return;
+            // Update DOM
+            if (document.getElementById("totalScans")) document.getElementById("totalScans").innerText = total;
+            if (document.getElementById("highCount")) document.getElementById("highCount").innerText = high;
+            if (document.getElementById("mediumCount")) document.getElementById("mediumCount").innerText = medium;
+            if (document.getElementById("lowCount")) document.getElementById("lowCount").innerText = low;
 
-        if (item.riskLevel.includes("HIGH")) {
-            high++;
-        } 
-        else if (item.riskLevel.includes("MEDIUM")) {
-            medium++;
-        } 
-        else if (item.riskLevel.includes("LOW")) {
-            low++;
-        }
-    });
+            // Percentages
+            let highPercent = total ? Math.round((high / total) * 100) : 0;
+            let mediumPercent = total ? Math.round((medium / total) * 100) : 0;
+            let lowPercent = total ? Math.round((low / total) * 100) : 0;
 
-    // Update numbers
-    document.getElementById("totalScans").innerText = total;
-    document.getElementById("highCount").innerText = high;
-    document.getElementById("mediumCount").innerText = medium;
-    document.getElementById("lowCount").innerText = low;
+            if (document.getElementById("highBar")) document.getElementById("highBar").style.width = highPercent + "%";
+            if (document.getElementById("mediumBar")) document.getElementById("mediumBar").style.width = mediumPercent + "%";
+            if (document.getElementById("lowBar")) document.getElementById("lowBar").style.width = lowPercent + "%";
 
-    // Calculate percentages for bars
-    let highPercent = total ? Math.round((high / total) * 100) : 0;
-    let mediumPercent = total ? Math.round((medium / total) * 100) : 0;
-    let lowPercent = total ? Math.round((low / total) * 100) : 0;
+            if (document.getElementById("highPerc")) document.getElementById("highPerc").innerText = highPercent + "%";
+            if (document.getElementById("mediumPerc")) document.getElementById("mediumPerc").innerText = mediumPercent + "%";
+            if (document.getElementById("lowPerc")) document.getElementById("lowPerc").innerText = lowPercent + "%";
+        });
+}
 
-    document.getElementById("highBar").style.width = highPercent + "%";
-    document.getElementById("mediumBar").style.width = mediumPercent + "%";
-    document.getElementById("lowBar").style.width = lowPercent + "%";
-
-    if(document.getElementById("highPerc")) document.getElementById("highPerc").innerText = highPercent + "%";
-    if(document.getElementById("mediumPerc")) document.getElementById("mediumPerc").innerText = mediumPercent + "%";
-    if(document.getElementById("lowPerc")) document.getElementById("lowPerc").innerText = lowPercent + "%";
-};
-
-
-/* Back Button */
 function goDashboard() {
     window.location.href = "dashboard.html";
 }

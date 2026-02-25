@@ -1,43 +1,70 @@
-const tableBody = document.querySelector("#historyTable tbody");
+/* =====================================
+   HISTORY MANAGEMENT (Firestore)
+===================================== */
 
-// Load history when page loads
-window.onload = function () {
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        loadHistory(user.uid);
+    }
+});
 
-    const history = JSON.parse(localStorage.getItem("scanHistory")) || [];
-    const tableBody = document.getElementById("historyTable");
+function loadHistory(userId) {
+    const tableBody = document.querySelector("#historyTable tbody");
+    if (!tableBody) return;
 
-    tableBody.innerHTML = "";
+    db.collection("scans")
+        .where("userId", "==", userId)
+        .orderBy("timestamp", "desc")
+        .onSnapshot((querySnapshot) => {
+            tableBody.innerHTML = "";
+            querySnapshot.forEach((doc) => {
+                const item = doc.data();
+                const date = item.timestamp ? item.timestamp.toDate().toLocaleString() : "Processing...";
+                
+                let riskClass = "low";
+                if (item.riskLevel.includes("HIGH")) riskClass = "high";
+                else if (item.riskLevel.includes("MEDIUM")) riskClass = "medium";
 
-    history.forEach(item => {
+                const row = `
+                    <tr>
+                        <td>${item.message}</td>
+                        <td class="${riskClass}">${item.riskLevel}</td>
+                        <td>${item.score}%</td>
+                        <td>${date}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }, (error) => {
+            console.error("Firestore Load Error:", error);
+        });
+}
 
-        const row = `
-            <tr>
-                <td>${item.message}</td>
-                <td>${item.riskLevel}</td>
-                <td>${item.score}%</td>
-                <td>${item.date}</td>
-            </tr>
-        `;
-
-        tableBody.innerHTML += row;
-    });
-
-};
 function clearHistory() {
+    const user = auth.currentUser;
+    if (!user) return;
 
-    const confirmClear = confirm("Are you sure you want to clear scan history?");
-
+    const confirmClear = confirm("Are you sure you want to delete all scan records?");
     if (confirmClear) {
-        localStorage.removeItem("scanHistory");
-
-        alert("Scan history cleared successfully ✅");
-
-        // If you are on history page, refresh table
-        if (document.getElementById("historyTable")) {
-            document.getElementById("historyTable").innerHTML = "";
-        }
+        db.collection("scans")
+            .where("userId", "==", user.uid)
+            .get()
+            .then((querySnapshot) => {
+                const batch = db.batch();
+                querySnapshot.forEach((doc) => {
+                    batch.delete(doc.ref);
+                });
+                return batch.commit();
+            })
+            .then(() => {
+                alert("Records deleted successfully.");
+            })
+            .catch((error) => {
+                console.error("Error deleting records:", error);
+            });
     }
 }
+
 function goanalytics() {
     window.location.href = "analytics.html";
 }

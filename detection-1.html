@@ -20,6 +20,7 @@
             <a href="analytics.html" class="nav-item">Analytics</a>
         </nav>
         <div class="header-right">
+            <img id="userProfilePic" class="user-avatar" src="" alt="" style="display: none;">
             <span id="welcomeUser" class="welcome-text"></span>
             <button class="logout-btn" onclick="logoutUser()">Logout</button>
         </div>
@@ -72,6 +73,9 @@
         </div>
     </main>
 
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="script.js"></script>
     <script>
     /* ===========================
@@ -138,9 +142,16 @@
     }
 
     function saveToHistory(message, riskLevel, score) {
-        let history = JSON.parse(localStorage.getItem("scanHistory")) || [];
-        history.push({ message: message, riskLevel: riskLevel, score: score, date: new Date().toLocaleString() });
-        localStorage.setItem("scanHistory", JSON.stringify(history));
+        const user = auth.currentUser;
+        if (!user) return;
+
+        db.collection("scans").add({
+            userId: user.uid,
+            message: message,
+            riskLevel: riskLevel,
+            score: score,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(err => console.error("Firestore Save Error:", err));
     }
     function goDashboard() { window.location.href = "dashboard.html"; }
     function goToScan() { window.location.href = "scan-history.html"; }
